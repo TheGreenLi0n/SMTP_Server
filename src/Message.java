@@ -49,8 +49,7 @@ public class Message {
         return To;
     }
 
-    /* Check whether the message is valid. In other words, check that
-       both sender and recipient contain only one @-sign. */
+    /* Check whether the message is valid. In other words, check that both sender and recipient contain only one @-sign. */
     public boolean isValid() {
         int fromat = From.indexOf('@');
         int toat = To.indexOf('@');

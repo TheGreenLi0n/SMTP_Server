@@ -33,8 +33,7 @@ public class MailClient extends Frame {
     public MailClient() {
         super("Java Mailclient");
 
-	/* Create panels for holding the fields. To make it look nice,
-	   create an extra panel for holding all the child panels. */
+	    /* Create panels for holding the fields. To make it look nice, create an extra panel for holding all the child panels. */
         Panel serverPanel = new Panel(new BorderLayout());
         Panel fromPanel = new Panel(new BorderLayout());
         Panel toPanel = new Panel(new BorderLayout());
@@ -56,8 +55,7 @@ public class MailClient extends Frame {
         fieldPanel.add(toPanel);
         fieldPanel.add(subjectPanel);
 
-	/* Create a panel for the buttons and add listeners to the
-	   buttons. */
+	    /* Create a panel for the buttons and add listeners to the buttons. */
         Panel buttonPanel = new Panel(new GridLayout(1, 0));
         btSend.addActionListener(new SendListener());
         btClear.addActionListener(new ClearListener());
