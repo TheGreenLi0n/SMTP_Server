@@ -1,4 +1,4 @@
-import java.net.*;
+import  java.net.*;
 import java.io.*;
 import java.util.*;
 
@@ -46,10 +46,10 @@ public class SMTPConnection {
         /* Send the message. Write the correct SMTP-commands in the correct order. No checking for errors, just throw them to the caller. */
     public void send(Envelope envelope) throws IOException {
 	    /* Send all the necessary commands to send a message. Call sendCommand() to do the dirty work. Do _not_ catch the exception thrown from sendCommand(). */
-        sendCommand("MAIL FROM: " + envelope.Sender + "\r\n", 250);
-        sendCommand("RCPT TO: " + envelope.Recipient + "\r\n", 250);
-
+        sendCommand("MAIL FROM: "+"<" + envelope.Sender+">" + "\r\n", 250);
+        sendCommand("RCPT TO: " +"<"+ envelope.Recipient + ">" + "\r\n", 250);
         sendCommand("DATA\r\n", 354);
+        sendCommand(envelope.Message + "\r\n"+".",250);
     }
 
         /* Close the connection. First, terminate on SMTP level, then close the socket. */

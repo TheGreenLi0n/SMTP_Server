@@ -27,14 +27,14 @@ public class Message {
         /* Remove whitespace */
         From = from.trim();
         To = to.trim();
-        Headers = "From: <" + From + ">" + CRLF;
-        Headers += "To: <" + To + ">" + CRLF;
-        Headers += "Subject: " + subject.trim() + CRLF;
+        Headers = "From: " + From + CRLF;
+        Headers += "To: " + To  + CRLF;
+        Headers += "Subject: " +  subject.trim() + CRLF;
 
 	/* A close approximation of the required format. Unfortunately
 	   only GMT. */
         SimpleDateFormat format =
-                new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'");
+                new SimpleDateFormat("EEE, dd MMM. yyyy HH:mm:ss 'GMT'");
         String dateString = format.format(new Date());
         Headers += "Date: " + dateString + CRLF;
         Body = text;
