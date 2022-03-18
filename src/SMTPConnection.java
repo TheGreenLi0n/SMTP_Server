@@ -26,13 +26,18 @@ public class SMTPConnection {
         toServer = new DataOutputStream(connection.getOutputStream());
 
         /* Fill in */
-	    /* Read a line from server and check that the reply code is 220. If not, throw an IOException. */
+
+
+        /* Read a line from server and check that the reply code is 220. If not, throw an IOException. */
+        String reply = fromServer.readLine();
+        if (parseReply(reply)!=220){
+            throw new IOException("Reply code was not 220");
+        }
         /* Fill in */
 
 	    /* SMTP handshake. We need the name of the local machine. Send the appropriate SMTP handshake command. */
-        String localhost = ""/* Fill in */;
-        sendCommand("HELO",202 /* Fill in */ );
-
+        String localhost = "127.0.0.1";
+        sendCommand("HELO " + localhost,250 /* Fill in */ );
         isConnected = true;
     }
 
