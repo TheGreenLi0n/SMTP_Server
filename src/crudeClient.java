@@ -9,7 +9,7 @@
 	   Scanner in = new Scanner(System.in);
 	        
     	   try{
-    		    Socket socketClient= new Socket("127.0.0.1",5558);
+    		    Socket socketClient= new Socket("smtp2.bhsi.xyz",2525);
     		    System.out.println("Client: "+"Connection Established");
      
     		    BufferedReader reader = 
