@@ -27,8 +27,8 @@ public class Message {
         /* Remove whitespace */
         From = from.trim();
         To = to.trim();
-        Headers = "From: " + From + CRLF;
-        Headers += "To: " + To + CRLF;
+        Headers = "From: <" + From + ">" + CRLF;
+        Headers += "To: <" + To + ">" + CRLF;
         Headers += "Subject: " + subject.trim() + CRLF;
 
 	/* A close approximation of the required format. Unfortunately

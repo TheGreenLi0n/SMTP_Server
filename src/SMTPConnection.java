@@ -31,29 +31,33 @@ public class SMTPConnection {
         /* Read a line from server and check that the reply code is 220. If not, throw an IOException. */
         String reply = fromServer.readLine();
         if (parseReply(reply)!=220){
+            System.out.println("NOORT sennddd");
             throw new IOException("Reply code was not 220");
-        }
+        }else
+            System.out.println("Sendddd");
         /* Fill in */
 
 	    /* SMTP handshake. We need the name of the local machine. Send the appropriate SMTP handshake command. */
         String localhost = "127.0.0.1";
-        sendCommand("HELO " + localhost,250 /* Fill in */ );
+        sendCommand("HELO " + localhost + "\r\n",250 /* Fill in */ );
         isConnected = true;
     }
 
         /* Send the message. Write the correct SMTP-commands in the correct order. No checking for errors, just throw them to the caller. */
     public void send(Envelope envelope) throws IOException {
-        /* Fill in */
 	    /* Send all the necessary commands to send a message. Call sendCommand() to do the dirty work. Do _not_ catch the exception thrown from sendCommand(). */
-        /* Fill in */
+        sendCommand("MAIL FROM: " + envelope.Sender + "\r\n", 250);
+        sendCommand("RCPT TO: " + envelope.Recipient + "\r\n", 250);
+
+        sendCommand("DATA\r\n", 354);
     }
 
         /* Close the connection. First, terminate on SMTP level, then close the socket. */
     public void close() {
         isConnected = false;
         try {
-            sendCommand( "",0/* Fill in */ );
-            // connection.close();
+            sendCommand( "QUIT" + "\r\n",221);
+            connection.close();
         } catch (IOException e) {
             System.out.println("Unable to close connection: " + e);
             isConnected = true;
@@ -64,11 +68,13 @@ public class SMTPConnection {
     private void sendCommand(String command, int rc) throws IOException {
         /* Fill in */
         /* Write command to server and read reply from server. */
-        /* Fill in */
-
-        /* Fill in */
+        toServer.writeBytes(command + "\r\n");
 	    /* Check that the server's reply code is the same as the parameter rc. If not, throw an IOException. */
-        /* Fill in */
+        if (parseReply(fromServer.readLine()) != rc){
+            System.out.println("NOT SEND Command");
+            throw new IOException("Reply code was not the same as RC");
+        }else
+            System.out.println("Command sent!");
     }
 
     /* Parse the reply line from the server. Returns the reply code. */
