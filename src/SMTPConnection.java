@@ -32,8 +32,8 @@ public class SMTPConnection {
         /* Fill in */
 
 	    /* SMTP handshake. We need the name of the local machine. Send the appropriate SMTP handshake command. */
-        String localhost = /* Fill in */;
-        sendCommand( /* Fill in */ );
+        String localhost = ""/* Fill in */;
+        sendCommand("",0 /* Fill in */ );
 
         isConnected = true;
     }
@@ -49,7 +49,7 @@ public class SMTPConnection {
     public void close() {
         isConnected = false;
         try {
-            sendCommand( /* Fill in */ );
+            sendCommand( "",0/* Fill in */ );
             // connection.close();
         } catch (IOException e) {
             System.out.println("Unable to close connection: " + e);
@@ -71,6 +71,8 @@ public class SMTPConnection {
     /* Parse the reply line from the server. Returns the reply code. */
     private int parseReply(String reply) {
         /* Fill in */
+        //int i = Integer.parseInt(argv[0])
+        return 0/* Fill in*/;
     }
 
     /* Destructor. Closes the connection if something bad happens. */
