@@ -21,7 +21,7 @@ public class SMTPConnection {
 
         /* Create an SMTPConnection object. Create the socket and the associated streams. Initialize SMTP connection. */
     public SMTPConnection(Envelope envelope) throws IOException {
-        connection = new Socket(envelope.DestAddr,2525)/* Fill in */;
+        connection = new Socket(envelope.DestAddr,2525);
         fromServer = new BufferedReader(new InputStreamReader(connection.getInputStream()));/* Fill in */;
         toServer = new DataOutputStream(connection.getOutputStream());
 
@@ -55,6 +55,7 @@ public class SMTPConnection {
         sendCommand("MAIL FROM: "+"<" + envelope.Sender+">" + "\r\n", 250);
         sendCommand("RCPT TO: " +"<"+ envelope.Recipient + ">" + "\r\n", 250);
         sendCommand("DATA\r", 354);
+        System.out.println("DATA");
         sendCommand(envelope.Message + "\r\n"+".",250);
     }
 
@@ -65,7 +66,7 @@ public class SMTPConnection {
             sendCommand( "QUIT" + "\r\n",221);
             connection.close();
         } catch (IOException e) {
-            System.out.println("Unable to close connection: " + e);
+            System.out.println("connection not closed: " + e);
             isConnected = true;
         }
     }
