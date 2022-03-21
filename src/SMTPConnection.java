@@ -54,7 +54,7 @@ public class SMTPConnection {
 	    /* Send all the necessary commands to send a message. Call sendCommand() to do the dirty work. Do _not_ catch the exception thrown from sendCommand(). */
         sendCommand("MAIL FROM: "+"<" + envelope.Sender+">" + "\r\n", 250);
         sendCommand("RCPT TO: " +"<"+ envelope.Recipient + ">" + "\r\n", 250);
-        sendCommand("DATA\r", 354);
+        sendCommand("DATA", 354);
         System.out.println("DATA");
         sendCommand(envelope.Message + "\r\n"+".",250);
     }
