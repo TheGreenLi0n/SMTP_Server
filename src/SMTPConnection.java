@@ -39,7 +39,13 @@ public class SMTPConnection {
 
 	    /* SMTP handshake. We need the name of the local machine. Send the appropriate SMTP handshake command. */
         String localhost = "127.0.0.1";
-        sendCommand("HELO " + localhost + "\r\n",250 /* Fill in */ );
+        sendCommand("EHLO " + localhost + "\r\n",250 /* Fill in */ );
+        for (int i = 0; i < 5; i++) {
+            fromServer.readLine();
+        }
+        sendCommand("auth login"+"\r",334);
+        sendCommand("YWJla2F0"+"\r",334);
+        sendCommand("YWJla2F0WVdKbGEyRjA="+"\r\n",235);
         isConnected = true;
     }
 
@@ -79,7 +85,7 @@ public class SMTPConnection {
 
     /* Parse the reply line from the server. Returns the reply code. */
     private int parseReply(String reply) {
-        StringTokenizer token = new StringTokenizer(reply);
+        StringTokenizer token = new StringTokenizer(reply.substring(0,3));
         String rc = token.nextToken();
         return Integer.parseInt(rc);
     }
